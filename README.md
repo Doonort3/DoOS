@@ -12,7 +12,7 @@ Created similar to UEFI SHELL
 4) Player > file > open. Go to the 'Oska' folder and **select the virtual machine image**.
 5) Start it up and in the popup window you select **"I copied it"** and you're done!
 
-If there are mistakes, please contact [Telegramm](https://t.me/doonxrt) or [VK](https://vk.com/shirakibaka)
+If there are mistakes, please contact [Telegram](https://t.me/doonxrt) or [VK](https://vk.com/shirakibaka)
 
 Through them you can get in touch for suggestions, discussions.
 
