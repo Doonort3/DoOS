@@ -10,7 +10,7 @@ Created similar to UEFI SHELL
    **It is important that the folders 'cosmos' and 'Oska' are in the same directory!**
 3) Run **VMware** (Virtual Box is not stable) - https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html
 4) Player > file > open. Go to the 'Oska' folder and **select the virtual machine image**.
-5) Start it up and you're done!
+5) Start it up and in the popup window you select **"I copied it"** and you're done!
 
 If there are mistakes, please contact [Telegramm](https://t.me/doonxrt) or [VK](https://vk.com/shirakibaka)
 
