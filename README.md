@@ -5,7 +5,7 @@ DoonortOS is built on Cosmos OS, uses .net, X#, IL2CPU.
 Created similar to SHELL
 
 ## Installing
-1) Download the '**main**' folder - https://drive.google.com/drive/folders/1VHwVbzSI0HNX8_eSkdSuhPUwKmgSNC8u?usp=sharing
+1) Download the '**main**' folder - https://drive.google.com/drive/folders/1VHwVbzSI0HNX8_eSkdSuhPUwKmgSNC8u?usp=sharing **Compiled ISO image will be output with delays**
 2) After you download the **zip archive**, you **unzip** it anywhere.
    **It is important that the folders 'cosmos' and 'Oska' are in the same directory!**
 3) Run **VMware** (Virtual Box is not stable) - https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html
@@ -15,9 +15,6 @@ Created similar to SHELL
 If there are mistakes, please contact [Telegram](https://t.me/doonxrt) or [VK](https://vk.com/shirakibaka)
 
 Through them you can get in touch for suggestions, discussions.
-
-
-#### Compiled ISO image will be output with delays in [Google Disk](https://drive.google.com/drive/folders/1VHwVbzSI0HNX8_eSkdSuhPUwKmgSNC8u?usp=sharing).
 ____
 ### Links
 Cosmos OS - [github page](https://github.com/CosmosOS/Cosmos)
