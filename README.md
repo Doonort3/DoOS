@@ -2,7 +2,7 @@
 Some DOS I created on Cosmos OS
 
 DoonortOS is built on Cosmos OS, uses .net, X#, IL2CPU.
-Created similar to UEFI SHELL
+Created similar to SHELL
 
 ## Installing
 1) Download the '**main**' folder - https://drive.google.com/drive/folders/1VHwVbzSI0HNX8_eSkdSuhPUwKmgSNC8u?usp=sharing
