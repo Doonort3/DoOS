@@ -1,4 +1,5 @@
-﻿using Cosmos.HAL;
+﻿// Using
+using Cosmos.HAL;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.Listing;
 using Cosmos.System.FileSystem.VFS;
@@ -15,8 +16,9 @@ namespace doonortOS
         protected override void BeforeRun()
         {
             // Creating FS
-            var fs = new CosmosVFS();
-            VFSManager.RegisterVFS(fs);
+            var fs = new Sys.FileSystem.CosmosVFS();
+            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+            Console.WriteLine(fs.GetVolumes().Count); 
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("[ doonort os ] - ok\n");
@@ -27,36 +29,87 @@ namespace doonortOS
 
         protected override void Run()
         {
-            var directoryList = VFSManager.GetDirectoryListing("0:/");
+            var currentDirectory = Directory.GetCurrentDirectory(); // Getting the current directory
+            var directoryList = VFSManager.GetDirectoryListing(currentDirectory); // Announcement of the main directory
 
             // Initial line
-            char[] charsToTrim = {' '};
-            Console.Write("0:/> ");
-            var input = Console.ReadLine();
-            var inputOk = input.Trim(charsToTrim);
-            Console.WriteLine();
+            char[] charsToTrim = {' '}; // Creating an array with a symbol to remove
+            Console.Write("0:/> "); // Main line
+            var input = Console.ReadLine(); // Input
+            var inputOk = input.Trim(charsToTrim); // Cleaning the input
+            Console.WriteLine(); // Indent
 
-            switch (inputOk == "help" | input == "Help")
+            switch (inputOk == "help" | input == "Help") // The 'help' command
             {
                 case true:
-                    Console.WriteLine("     help -- All commands,");
-                    Console.WriteLine("     authors -- Project authors,");
-                    Console.WriteLine("     echo -- outputs its arguments via the standard output channel.\n" +
-                                      "     In other words, it outputs what you wanted,");
-                    Console.WriteLine("     'clear' or 'cls' -- clear the console,");
-                    Console.WriteLine("     VGAtest -- test vga. After that, it will need to be restarted!");
-                    Console.WriteLine("     disk info -- disk information,");
-                    Console.WriteLine("     ls -- files in the directory,");
-                    Console.WriteLine("     ls -a -- full information about the files in the directory,");
-                    Console.WriteLine("     read file -- read the contents of the file,");
-                    Console.WriteLine("     edit file -- edit the contents of the file,\n" +
-                                      "     if you entered fewer characters than there are in the file now,\n" +
-                                      "     the text will be written without clearing the old characters,");
-                    Console.WriteLine("     create file -- creating (so far) a txt file,");
-                    Console.WriteLine("     clear file -- clear the file created to fix the bug 'edit file'");
-                    Console.WriteLine("     delete file -- deleting the file you selected in the main directory");
-                    Console.WriteLine("     restart -- restart os,");
-                    Console.WriteLine("     shutdown -- Shutting down and shutting down.");
+                    Console.WriteLine("   > help -- All commands.");
+                    Console.WriteLine("         \n# Information");
+                    Console.WriteLine("     authors -- Project authors.");
+                    Console.WriteLine("     about -- About the system.");
+                    Console.WriteLine("         \n# Basic Commands");
+                    Console.WriteLine("     'clear' or 'cls' -- Clear the console.");
+                    Console.WriteLine("     echo -- Outputs its arguments via the standard output channel.\n" +
+                                      "     In other words, it outputs what you wanted.");
+                    Console.WriteLine("         \n# VGA");
+                    Console.WriteLine("     VGAtest -- Test vga. After that, it will need to be restarted!");
+                    Console.WriteLine("         \n# Disk");
+                    Console.WriteLine("     disk info -- Disk information.");
+                    Console.WriteLine("\n\nPage 1 of 3");
+                    a: Console.WriteLine("Enter the` number of the page you want(write '0' to stop): ");
+                    var pageNumber = Convert.ToInt32(Console.ReadLine());  // Converting input to int32
+
+                    switch (pageNumber)
+                    {
+                        case 1: // If 'pageNumber' is 1
+                            Console.WriteLine("   > help -- All commands.");
+                            Console.WriteLine("         \n# Information");
+                            Console.WriteLine("     authors -- Project authors.");
+                            Console.WriteLine("     about -- About the system.");
+                            Console.WriteLine("         \n# Basic Commands");
+                            Console.WriteLine("     'clear' or 'cls' -- Clear the console.");
+                            Console.WriteLine("     echo -- Outputs its arguments via the standard output channel.\n" +
+                                              "     In other words, it outputs what you wanted.");
+                            Console.WriteLine("         \n# VGA");
+                            Console.WriteLine("     VGAtest -- Test vga. After that, it will need to be restarted!");
+                            Console.WriteLine("         \n# Disk");
+                            Console.WriteLine("     disk info -- Disk information.");
+                            Console.WriteLine("\n\nPage 1 of 3");
+                            goto a; // Return to input
+                        case 2: // If 'pageNumber' is 2
+                            Console.WriteLine("         \n# File handling");
+                            Console.WriteLine("     pwd -- Show current location.");
+                            Console.WriteLine("     ls -- Files in the directory.");
+                            Console.WriteLine("     ls -a -- Full information about the files in the directory.");
+                            Console.WriteLine("     mkdir -- Creating a directory.");
+                            Console.WriteLine("     rm -- Deleting an empty directory.");
+                            Console.WriteLine("     read file -- Read the contents of the file.");
+                            Console.WriteLine("     edit file -- Edit the contents of the file,\n" +
+                                              "     if you entered fewer characters than there are in the file now,\n" +
+                                              "     the text will be written without clearing the old characters.");
+                            Console.WriteLine("     create file -- Creating (so far) a txt file.");
+                            Console.WriteLine("     clear file -- Clear the file created to fix the bug 'edit file'.");
+                            Console.WriteLine("     delete file -- Deleting the file you selected in the main directory.");
+                            Console.WriteLine("\n\nPage 2 of 3");
+                            goto a; // Return to input
+                        case 3: // If 'pageNumber' is 3
+                            Console.WriteLine("         \n#Computer");
+                            Console.WriteLine("     restart -- Restart os.");
+                            Console.WriteLine("     shutdown -- Shutting down and shutting down.");
+                            Console.WriteLine("\n\nPage 3 of 3");
+                            goto a; // Return to input
+                    }
+
+                    if (pageNumber == 0) // If 'pageNumber' is 0 (exit)
+                    {
+                        Console.WriteLine(); // pass
+                    }
+                    else // If nothing fits or the condition is violated
+                    {
+                        Console.WriteLine($"Page {pageNumber} does not exist");
+                    }
+                    
+                    /*Console.WriteLine("         \n# User information");
+                    Console.WriteLine("     whoami -- User info.");*/
                     break;
 
                 default:
@@ -70,40 +123,44 @@ namespace doonortOS
                         case "echo": // The 'echo' command
                         {
                             Console.WriteLine("Args: ");
-                            var echoArgs = Console.ReadLine();
+                            string echoArgs = Console.ReadLine(); // Entering an argument for 'echo'
                             Console.WriteLine(echoArgs);
                             break;
                         }
-                        default:
+                        case "about":
+                        {
+                            Console.WriteLine("dooos ver. 1.1-b1");
+                            break;
+                        }
+                            default:
                         {
                             if (inputOk == "cls" | input == "clear") // The 'clear' command
                             {
-                                Console.Clear();
+                                Console.Clear(); // Cleaning the Console with the Basic Method
                             }
 
                             else switch (inputOk)
                             {
                                 case "VGAtest": // The 'VGAtest' command
                                 {
-                                    VGADriverII.Initialize(VGAMode.Pixel320x200DB);
-                                    VGAGraphics.Clear(VGAColor.Black);
+                                    VGADriverII.Initialize(VGAMode.Pixel320x200DB); // Initializing the display 320 by 200 pixels
+                                    VGAGraphics.Clear(VGAColor.Black); // Screen background color
                                     VGAGraphics.DrawString(0, 8, "Test passed.\n", VGAColor.Green, VGAFont.Font8x8);
                                     VGAGraphics.DrawString(0, 24, "Hello World!\nWrite 'restart' for reboot system\nor 'shutdown'",
-                                        VGAColor.Orange, VGAFont.Font8x16);
-                                    VGAGraphics.Display();
+                                        VGAColor.Orange, VGAFont.Font8x16); // 0, 24 - coordinates, after text, text color orange, font 8 by 16 pixels
+                                    VGAGraphics.Display(); // Running the display
 
-                                    var VGAreboot = Console.ReadLine();
-                                    if (VGAreboot == "restart")
-                                        Sys.Power.Reboot();
-                                    else if (VGAreboot == "shutdown") Sys.Power.Shutdown();
+                                    string VGAreboot = Console.ReadLine(); // The way to reload
+                                    if (VGAreboot == "restart") Sys.Power.Reboot(); // Restarting the computer
+                                    else if (VGAreboot == "shutdown") Sys.Power.Shutdown(); // Shutting down the computer
                                     break;
                                 }
                                 case "disk info": // The 'disk info' command
                                 {
-                                    var availableSpace = VFSManager.GetAvailableFreeSpace("0:/");
-                                    Console.WriteLine("Available Free Space: " + availableSpace + "\n");
-                                    var fsType = VFSManager.GetFileSystemType("0:/");
-                                    Console.WriteLine("File System Type: " + fsType);
+                                    var availableSpace = VFSManager.GetAvailableFreeSpace("0:/"); // Getting free space in '0:/' in bytes
+                                    Console.WriteLine("Available Free Space: " + availableSpace + "\n"); // Free space output
+                                    var fsType = VFSManager.GetFileSystemType("0:/"); // Getting the file system '0:/'
+                                    Console.WriteLine("File System Type: " + fsType); // File system type output
                                     break;
                                 }
                                 case "ls": // The 'ls' command
@@ -114,10 +171,10 @@ namespace doonortOS
                                 }
                                 case "ls -a": // The 'ls -a' command
                                 {
-                                    foreach (var directoryEntry in directoryList)
+                                    foreach (var directoryEntry in directoryList) // Enumerating files from the directory specified in the 'directoryEntry' variable
                                     {
-                                        var fileStream = directoryEntry.GetFileStream();
-                                        var entryType = directoryEntry.mEntryType;
+                                        var fileStream = directoryEntry.GetFileStream(); // Getting the file into the 'fileStream' variable
+                                        var entryType = directoryEntry.mEntryType; 
 
                                         if (entryType == DirectoryEntryTypeEnum.File)
                                         {
@@ -140,9 +197,9 @@ namespace doonortOS
                                 case "read file": // The 'read file' command
                                 {
                                     Console.WriteLine("Which file to read: ");
-                                    var nameReadFile = Console.ReadLine();
+                                    string nameReadFile = Console.ReadLine();
 
-                                    var exist = File.Exists($@"0:\{nameReadFile}");
+                                    bool exist = File.Exists($@"0:\{nameReadFile}");
                                     if (exist == true)
                                     {
                                         var helloFile = VFSManager.GetFile($@"0:\{nameReadFile}");
@@ -167,13 +224,13 @@ namespace doonortOS
                                 case "edit file": // The 'edit file' command
                                 {
                                     Console.WriteLine("Which file should I edit: ");
-                                    var nameEditFile = Console.ReadLine();
+                                    string nameEditFile = Console.ReadLine();
 
                                     var exist = File.Exists($@"0:\{nameEditFile}");
                                     if (exist == true)
                                     {
                                         Console.WriteLine("Entry text: ");
-                                        var textEditFile = Console.ReadLine();
+                                        string textEditFile = Console.ReadLine();
 
                                         var helloFile = VFSManager.GetFile($@"0:\{nameEditFile}");
                                         var helloFileStream = helloFile.GetFileStream();
@@ -196,7 +253,7 @@ namespace doonortOS
                                 case "create file": // The 'create file' command
                                 {
                                     Console.WriteLine("File name without an extension: ");
-                                    var nameCreateFile = Console.ReadLine();
+                                    string nameCreateFile = Console.ReadLine();
                                     VFSManager.CreateFile($@"0:\{nameCreateFile}.txt");
 
                                     var checkCreate = File.Exists($@"0:\{nameCreateFile}.txt");
@@ -218,7 +275,7 @@ namespace doonortOS
                                 case "clear file": // The 'clear file' command
                                 {
                                     Console.WriteLine("Which file should I clear: ");
-                                    var nameClearFile = Console.ReadLine();
+                                    string nameClearFile = Console.ReadLine();
                                     var exist = File.Exists($@"0:\{nameClearFile}");
 
                                     if (exist == true)
@@ -245,7 +302,7 @@ namespace doonortOS
                                 case "delete file": // The 'delete file' command
                                 {
                                     Console.WriteLine("Which file should I delete: ");
-                                    var nameDeleteFile = Console.ReadLine();
+                                    string nameDeleteFile = Console.ReadLine();
                                     var exist = File.Exists($@"0:\{nameDeleteFile}");
                                     if (exist == true)
                                     {
@@ -258,17 +315,55 @@ namespace doonortOS
                                                 Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine("File deleted");
                                                 Console.ResetColor();
+
                                                 break;
+
                                             case true:
                                                 Console.ForegroundColor = ConsoleColor.Red;
                                                 Console.WriteLine($"Unknown error\nfile '{nameDeleteFile}' is not deleted");
                                                 Console.ResetColor();
+
                                                 break;
                                         }
                                     }
+                                    break;
+                                }
+                                case "pwd": // The 'pwd' command
+                                {
+                                    string path = Directory.GetCurrentDirectory();
+                                    Console.WriteLine($"Current directory: {path}");
 
                                     break;
                                 }
+                                case "mkdir": // The 'mkdir' command
+                                {
+                                    Console.WriteLine("Enter the name of the directory to create: ");
+                                    string nameCreateDir = Console.ReadLine();
+
+                                    System.IO.Directory.CreateDirectory($@"0:\{nameCreateDir}");
+                                    Console.WriteLine($"The directory was created successfully at 0:\\{nameCreateDir}");
+
+                                    break;
+                                }
+                                case "rm": // The 'rm' command
+                                {
+                                    Console.WriteLine("Enter the name of the directory to delete: ");
+                                    string nameDeleteDir = Console.ReadLine();
+                                    System.IO.Directory.Delete($@"0:\{nameDeleteDir}");
+
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine($"The directory {nameDeleteDir} was deleted successfully ");
+                                    Console.ResetColor();
+
+                                    break;
+                                }
+
+                                /*case "whoami": // The 'whoami' command
+                                {
+                                    Console.WriteLine("UserName: {0}", Environment.UserName);
+                                    break;
+                                }*/
+
                                 case "restart": // The 'restart' command
                                     Sys.Power.Reboot();
                                     break;
@@ -279,8 +374,9 @@ namespace doonortOS
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine($"Command '{inputOk}' not found!");
                                     Console.ResetColor();
+
                                     break;
-                            }
+                                }
 
                             break;
                         }
