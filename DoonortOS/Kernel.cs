@@ -205,15 +205,15 @@ namespace doonortOS
 
                                         if (entryType == DirectoryEntryTypeEnum.File)
                                         {
-                                            var content = new byte[fileStream.Length];
-                                            fileStream.Read(content, 0, (int) fileStream.Length);
-                                            Console.WriteLine("File name: " + directoryEntry.mName);
-                                            Console.WriteLine("File size: " + directoryEntry.mSize + " bit");
-                                            Console.WriteLine("Content: ");
-                                            foreach (var b in content)
+                                            var content = new byte[fileStream.Length]; // Everything in the file is written to bytes
+                                            fileStream.Read(content, 0, (int) fileStream.Length); // Getting the length of the text
+                                            Console.WriteLine("File name: " + directoryEntry.mName); // File name output
+                                            Console.WriteLine("File size: " + directoryEntry.mSize + " bit"); // File size output in bytes
+                                            Console.WriteLine("Content: "); 
+                                            foreach (var b in content) // Getting Content 
                                             {
-                                                var ch = (char) b;
-                                                Console.Write(ch.ToString());
+                                                var ch = (char) b; 
+                                                Console.Write(ch.ToString()); // Output one letter(char) at a time
                                             }
                                         }
                                         Console.WriteLine();
@@ -226,22 +226,22 @@ namespace doonortOS
                                     Console.WriteLine("Which file to read: ");
                                     string nameReadFile = Console.ReadLine();
 
-                                    bool exist = File.Exists($@"0:\{nameReadFile}");
-                                    if (exist == true)
+                                    bool exist = File.Exists($@"0:\{nameReadFile}"); // Checking the existence of the input file
+                                    if (exist == true) // If it exists
                                     {
-                                        var helloFile = VFSManager.GetFile($@"0:\{nameReadFile}");
+                                        var helloFile = VFSManager.GetFile($@"0:\{nameReadFile}"); // Getting the file
                                         var helloFileStream = helloFile.GetFileStream();
 
-                                        if (helloFileStream.CanRead)
+                                        if (helloFileStream.CanRead) // If the file is read by the system
                                         {
-                                            var textToRead = new byte[helloFileStream.Length];
+                                            var textToRead = new byte[helloFileStream.Length]; // It was
                                             helloFileStream.Read(textToRead, 0, (int) helloFileStream.Length);
                                             Console.WriteLine(Encoding.Default.GetString(textToRead));
                                         }
                                     }
-                                    else if (exist == false)
+                                    else if (exist == false) // If it does not exist
                                     {
-                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.ForegroundColor = ConsoleColor.Red; // Error color
                                         Console.WriteLine($"The file named '{nameReadFile}' does not exist!");
                                         Console.ForegroundColor = ConsoleColor.Gray; // Не нравится - пошёл нахуй
                                     }
@@ -253,22 +253,22 @@ namespace doonortOS
                                     Console.WriteLine("Which file should I edit: ");
                                     string nameEditFile = Console.ReadLine();
 
-                                    var exist = File.Exists($@"0:\{nameEditFile}");
-                                    if (exist == true)
+                                    var exist = File.Exists($@"0:\{nameEditFile}"); // Does the file exist?
+                                    if (exist == true) // If there is
                                     {
                                         Console.WriteLine("Entry text: ");
                                         string textEditFile = Console.ReadLine();
 
-                                        var helloFile = VFSManager.GetFile($@"0:\{nameEditFile}");
+                                        var helloFile = VFSManager.GetFile($@"0:\{nameEditFile}"); // Getting the file
                                         var helloFileStream = helloFile.GetFileStream();
 
-                                        if (helloFileStream.CanWrite)
+                                        if (helloFileStream.CanWrite) // If it records
                                         {
-                                            var textToWrite = Encoding.ASCII.GetBytes(textEditFile);
+                                            var textToWrite = Encoding.ASCII.GetBytes(textEditFile); 
                                             helloFileStream.Write(textToWrite, 0, textToWrite.Length);
                                         }
                                     }
-                                    else if (exist == false)
+                                    else if (exist == false) // If there is no
                                     {
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine($"The file named '{nameEditFile}' does not exist!");
