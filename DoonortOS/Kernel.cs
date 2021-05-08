@@ -34,6 +34,7 @@ namespace doonortOS
 
             // Initial line
             char[] charsToTrim = {' '}; // Creating an array with a symbol to remove
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("0:/> "); // Main line
             var input = Console.ReadLine(); // Input
             var inputOk = input.Trim(charsToTrim); // Cleaning the input
@@ -43,40 +44,60 @@ namespace doonortOS
             {
                 case true:
                     Console.WriteLine("   > help -- All commands.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("         \n# Information");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("     authors -- Project authors.");
                     Console.WriteLine("     about -- About the system.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("         \n# Basic Commands");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("     'clear' or 'cls' -- Clear the console.");
                     Console.WriteLine("     echo -- Outputs its arguments via the standard output channel.\n" +
                                       "     In other words, it outputs what you wanted.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("         \n# VGA");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("     VGAtest -- Test vga. After that, it will need to be restarted!");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("         \n# Disk");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("     disk info -- Disk information.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\n\nPage 1 of 3");
                     a: Console.WriteLine("Enter the` number of the page you want(write '0' to stop): ");
                     var pageNumber = Convert.ToInt32(Console.ReadLine());  // Converting input to int32
-
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     switch (pageNumber)
                     {
                         case 1: // If 'pageNumber' is 1
                             Console.WriteLine("   > help -- All commands.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("         \n# Information");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("     authors -- Project authors.");
                             Console.WriteLine("     about -- About the system.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("         \n# Basic Commands");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("     'clear' or 'cls' -- Clear the console.");
                             Console.WriteLine("     echo -- Outputs its arguments via the standard output channel.\n" +
                                               "     In other words, it outputs what you wanted.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("         \n# VGA");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("     VGAtest -- Test vga. After that, it will need to be restarted!");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("         \n# Disk");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("     disk info -- Disk information.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("\n\nPage 1 of 3");
                             goto a; // Return to input
                         case 2: // If 'pageNumber' is 2
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("         \n# File handling");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("     pwd -- Show current location.");
                             Console.WriteLine("     ls -- Files in the directory.");
                             Console.WriteLine("     ls -a -- Full information about the files in the directory.");
@@ -89,23 +110,29 @@ namespace doonortOS
                             Console.WriteLine("     create file -- Creating (so far) a txt file.");
                             Console.WriteLine("     clear file -- Clear the file created to fix the bug 'edit file'.");
                             Console.WriteLine("     delete file -- Deleting the file you selected in the main directory.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("\n\nPage 2 of 3");
                             goto a; // Return to input
                         case 3: // If 'pageNumber' is 3
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("         \n#Computer");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("     restart -- Restart os.");
                             Console.WriteLine("     shutdown -- Shutting down and shutting down.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("\n\nPage 3 of 3");
                             goto a; // Return to input
                     }
 
                     if (pageNumber == 0) // If 'pageNumber' is 0 (exit)
                     {
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine(); // pass
                     }
                     else // If nothing fits or the condition is violated
-                    {
+                    {   Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"Page {pageNumber} does not exist");
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     
                     /*Console.WriteLine("         \n# User information");
@@ -216,7 +243,7 @@ namespace doonortOS
                                     {
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine($"The file named '{nameReadFile}' does not exist!");
-                                        Console.ResetColor(); // Не нравится - пошёл нахуй
+                                        Console.ForegroundColor = ConsoleColor.Gray; // Не нравится - пошёл нахуй
                                     }
 
                                     break;
@@ -245,7 +272,7 @@ namespace doonortOS
                                     {
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine($"The file named '{nameEditFile}' does not exist!");
-                                        Console.ResetColor();
+                                        Console.ForegroundColor = ConsoleColor.Gray;
                                     }
 
                                     break;
@@ -261,13 +288,13 @@ namespace doonortOS
                                     {
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         Console.WriteLine("File created.");
-                                        Console.ResetColor();
+                                        Console.ForegroundColor = ConsoleColor.Gray;
                                     }
                                     else if (checkCreate == false)
                                     {
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine($"Unknown error\nFile '{nameCreateFile}' was not created");
-                                        Console.ResetColor();
+                                        Console.ForegroundColor = ConsoleColor.Gray;
                                     }
 
                                     break;
@@ -294,7 +321,7 @@ namespace doonortOS
                                     {
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine($"The file named '{nameClearFile}' does not exist!");
-                                        Console.ResetColor();
+                                        Console.ForegroundColor = ConsoleColor.Gray;
                                     }
 
                                     break;
@@ -314,14 +341,14 @@ namespace doonortOS
                                             case false:
                                                 Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine("File deleted");
-                                                Console.ResetColor();
+                                                Console.ForegroundColor = ConsoleColor.Gray;
 
                                                 break;
 
                                             case true:
                                                 Console.ForegroundColor = ConsoleColor.Red;
                                                 Console.WriteLine($"Unknown error\nfile '{nameDeleteFile}' is not deleted");
-                                                Console.ResetColor();
+                                                Console.ForegroundColor = ConsoleColor.Gray;
 
                                                 break;
                                         }
@@ -353,7 +380,7 @@ namespace doonortOS
 
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine($"The directory {nameDeleteDir} was deleted successfully ");
-                                    Console.ResetColor();
+                                    Console.ForegroundColor = ConsoleColor.Gray;
 
                                     break;
                                 }
@@ -373,7 +400,7 @@ namespace doonortOS
                                 default: // If the command is not found
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine($"Command '{inputOk}' not found!");
-                                    Console.ResetColor();
+                                    Console.ForegroundColor = ConsoleColor.Gray;
 
                                     break;
                                 }
