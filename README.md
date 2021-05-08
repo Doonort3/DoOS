@@ -1,7 +1,7 @@
-# DoonortOS
+# DooOS
 Some DOS I created on Cosmos OS
 
-DoonortOS is built on Cosmos OS, uses .net, X#, IL2CPU.
+DooOS is built on Cosmos OS, uses .net, X#, IL2CPU.
 Created similar to SHELL
 
 ## Installing
