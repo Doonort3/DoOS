@@ -16,7 +16,8 @@ Created similar to SHELL
 5) Right click on the created virtual machine, **settings** -> **Hard Disk**, at the bottom '**remove **', there '**Add**' -> next -> next -> **Use an existing virtual disk** -> next -> '**Browse**', select '**Filesystem.vmdk**' -> **finish** -> **Keep Existing Format!** -> ok
 6) Start-up virtual machine
 
-If there are mistakes, please contact [Telegram](https://t.me/doonxrt) or [VK](https://vk.com/shirakibaka)
+If there are mistakes, please contact [Telegram](https://t.me/doonxrt), [VK](https://vk.com/shirakibaka)
+or GitHub [issues](https://github.com/Doonort3/DooOS/issues)
 
 Through them you can get in touch for suggestions, discussions.
 ____
