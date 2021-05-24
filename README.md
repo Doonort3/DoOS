@@ -5,12 +5,16 @@ DooOS is built on Cosmos OS, uses .net, X#, IL2CPU.
 Created similar to SHELL
 
 ## Installing
+
+## Video(YouTube) tutorial - [click](https://www.youtube.com/watch?v=4T_pHdSNYVs)
+
+### Text instruction:
 1) Download the '**main**' folder - https://drive.google.com/drive/folders/1VHwVbzSI0HNX8_eSkdSuhPUwKmgSNC8u?usp=sharing **Compiled ISO image will be output with delays**
 2) After you download the **zip archive**, you **unzip** it anywhere.
-   **It is important that the folders 'cosmos' and 'Oska' are in the same directory!**
 3) Run **VMware** (Virtual Box is not stable) - https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html
-4) Player > file > open. Go to the 'Oska' folder and **select the virtual machine image**.
-5) Start it up and in the popup window you select **"I copied it"** and you're done!
+4) Player > file > new virtual machine. Select **Installer disk image file (iso)** -> **Browse..**, go to the 'main' folder and **select disk image 'DoonortOS.iso'**. After just click on next.
+5) Right click on the created virtual machine, **settings** -> **Hard Disk**, at the bottom '**remove **', there '**Add**' -> next -> next -> **Use an existing virtual disk** -> next -> '**Browse**', select '**Filesystem.vmdk**' -> **finish** -> **Keep Existing Format!** -> ok
+6) Start-up virtual machine
 
 If there are mistakes, please contact [Telegram](https://t.me/doonxrt) or [VK](https://vk.com/shirakibaka)
 
@@ -18,4 +22,3 @@ Through them you can get in touch for suggestions, discussions.
 ____
 ### Links
 Cosmos OS - [github page](https://github.com/CosmosOS/Cosmos)
-
