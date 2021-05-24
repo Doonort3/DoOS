@@ -1,7 +1,7 @@
-# DooOS
+# DoOS
 Some DOS I created on Cosmos OS
 
-DooOS is built on Cosmos OS, uses .net, X#, IL2CPU.
+DoOS is built on Cosmos OS, uses .net, X#, IL2CPU.
 Created similar to SHELL
 
 ## Installing
@@ -22,4 +22,8 @@ or GitHub [issues](https://github.com/Doonort3/DooOS/issues)
 Through them you can get in touch for suggestions, discussions.
 ____
 ### Links
-Cosmos OS - [github page](https://github.com/CosmosOS/Cosmos)
+Cosmos OS - [**github page**](https://github.com/CosmosOS/Cosmos)
+
+My telegram channel - [**click**](https://t.me/Doonort_ch), changelogs are also published there.
+
+ps: I need testers ;(
