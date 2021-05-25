@@ -44,7 +44,12 @@ namespace doonortOS
                 var inputOk = input.Trim(charsToTrim); // Cleaning the input
                 Console.WriteLine(); // Indent
 
-                if (inputOk.StartsWith("help"))
+
+                if (inputOk == "clear" || inputOk == "cls") // The 'cls' and 'clear' command
+                {
+                    Console.Clear();
+                }
+                else if (inputOk.StartsWith("help")) // The 'help' command
                 {
                     if (inputOk == "help")
                     {
@@ -73,7 +78,7 @@ namespace doonortOS
                         Console.WriteLine("\n\nPage 1 of 3");
                         Console.WriteLine("Use 'help' and page number(1,2,3) e.g. 'help 2'.");
                     }
-                    else if (inputOk == "help 1")
+                    else if (inputOk == "help 1") // The first page of the 'help' command
                     {
                         Console.WriteLine("   > help -- All commands.");
                         Console.ForegroundColor = ConsoleColor.White;
@@ -135,17 +140,7 @@ namespace doonortOS
                     {
                         Console.WriteLine("The line is empty");
                     }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Page number {inputOk.Remove(0, 5)} not found!");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-                }
 
-                if (inputOk == "clear" || inputOk == "cls")
-                {
-                    Console.Clear();
                 }
                 else if (inputOk == "authors")
                 {
@@ -336,21 +331,17 @@ namespace doonortOS
                         File.Delete($@"0:\{nameDeleteFile}");
 
                         var checkDelete = File.Exists($@"0:\{nameDeleteFile}");
-                        switch (checkDelete)
+                        if (checkDelete == false)
                         {
-                            case false:
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("File deleted");
-                                Console.ForegroundColor = ConsoleColor.Gray;
-
-                                break;
-
-                            case true:
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine($"Unknown error\nfile '{nameDeleteFile}' is not deleted");
-                                Console.ForegroundColor = ConsoleColor.Gray;
-
-                                break;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("File deleted");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                        }
+                        else if (checkDelete == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"Unknown error\nfile '{nameDeleteFile}' is not deleted");
+                            Console.ForegroundColor = ConsoleColor.Gray;
                         }
                     }
                 }
@@ -385,24 +376,22 @@ namespace doonortOS
                 {
                     Sys.Power.Shutdown();
                 }
-                else
-                {
-                    if (inputOk == Convert.ToString(inputOk.StartsWith("help")))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Command '{inputOk}' not found!");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-                }
-
-                if (inputOk == "echo")
+                else if (inputOk == "echo")
                 {
                     Console.WriteLine("Use: 'echo text' e.g 'echo Hello, World!'");
                 }
-
                 else if (inputOk.StartsWith("echo "))
                 {
                     Console.WriteLine(inputOk.Remove(0, 5));
+                }
+                else
+                {
+                    if (inputOk != Convert.ToString(inputOk.StartsWith("help ")) || inputOk != Convert.ToString(inputOk.StartsWith("help")))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Command '{inputOk}' not found! Use 'help'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
                 }
             }
 
