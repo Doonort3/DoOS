@@ -1,8 +1,7 @@
 # DoOS
-Some DOS I created on Cosmos OS
+Simple similar to DOS operating system with Command Line Interface.
 
 DoOS is built on Cosmos OS, uses .net, X#, IL2CPU.
-Created similar to SHELL
 
 ## Installing
 
