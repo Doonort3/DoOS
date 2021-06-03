@@ -1,21 +1,22 @@
-﻿// Help 3 (справка, страница 3)
+﻿
+// About (о системе)
 
-namespace doos_cli_re2.Core
+namespace Doos_cli.Core
 {
-    public class OKAY : CLICommand
+    public class CLI_ABOUT_LITE : CLICommand
     {
-        public OKAY()
+        public CLI_ABOUT_LITE()
         {
             names = new string[3]
             {
-                "hack", "nice", "okay"
+                "about", "info", "ver"
             };
             completed = false;
         }
 
         public override void Execute(string[] args)
         {
-            CLI.Okay();
+            CLI_lite.About();
 
             base.Execute(args);
         }

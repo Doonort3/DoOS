@@ -4,11 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using doos_cli_re2.Core;
-using doos_cli_re2.Hardware;
+using Doos_cli.Hardware;
 using Sys = Cosmos.System;
 
-namespace doos_cli_re2.Core
+namespace Doos_cli.Core
 {
     public static class CLI
         {
@@ -44,10 +43,10 @@ namespace doos_cli_re2.Core
                     Commands.Add(new CLI_DELETE_DIRECTORY());
                     Commands.Add(new OKAY());
                     Console.Clear();
+                    PMFAT.Initialize();
+                    if (!PMFAT.Initialize()) { Console.WriteLine("[FATAL ERROR] could not initialize fat driver!"); CLI_lite.InitializeLite(); }
                     WriteLine("Welcome to doos CLI!", ConsoleColor.Blue);
                     WriteLine("Enter 'help-1' to display the first page of commands.");
-
-                    GetInput();
 
                 }
                 catch (Exception e)

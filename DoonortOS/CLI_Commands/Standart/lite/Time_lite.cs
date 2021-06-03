@@ -1,21 +1,21 @@
-﻿
+﻿// Time (дата и время)
 
 namespace Doos_cli.Core
 {
-    public class CLI_PWD : CLICommand
+    public class CLI_CTIME_LITE : CLICommand
     {
-        public CLI_PWD()
+        public CLI_CTIME_LITE()
         {
-            names = new string[1]
+            names = new string[2]
             {
-                "pwd"
+                "time", "date"
             };
             completed = false;
         }
 
         public override void Execute(string[] args)
         {
-            CLI.Pwd();
+            CLI_lite.CTime();
 
             base.Execute(args);
         }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Cosmos.System.FileSystem.VFS;
 
-namespace doos_cli_re2.Core
+namespace Doos_cli.Core
 {
     public static class SystemInfo
     {

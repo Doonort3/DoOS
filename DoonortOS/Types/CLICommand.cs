@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace doos_cli_re2.Core
+﻿
+namespace Doos_cli.Core
 {
     public abstract class CLICommand
     {

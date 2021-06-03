@@ -22,8 +22,8 @@
         <VMware_CosmosDebugPort>Serial: COM1</VMware_CosmosDebugPort>
         <VMware_VisualStudioDebugPort>Pipe: Cosmos\Serial</VMware_VisualStudioDebugPort>
         <VMware_PxeInterface>192.168.0.8</VMware_PxeInterface>
-        <VMware_EnableGDB>True</VMware_EnableGDB>
-        <VMware_StartCosmosGDB>True</VMware_StartCosmosGDB>
+        <VMware_EnableGDB>False</VMware_EnableGDB>
+        <VMware_StartCosmosGDB>False</VMware_StartCosmosGDB>
         <ISO_StackCorruptionDetectionEnabled>True</ISO_StackCorruptionDetectionEnabled>
         <ISO_StackCorruptionDetectionLevel>MethodFooters</ISO_StackCorruptionDetectionLevel>
         <ISO_Description>Creates a bootable ISO image which can be burned to a DVD. After running the selected project, an explorer window will open containing the ISO file. The ISO file can then be burned to a CD or DVD and used to boot a physical or virtual system.</ISO_Description>
@@ -60,9 +60,9 @@
         <StartCosmosGDB>False</StartCosmosGDB>
         <VisualStudioDebugPort>Pipe: Cosmos\Serial</VisualStudioDebugPort>
         <CosmosDebugPort>Serial: COM1</CosmosDebugPort>
-        <Launch>VMware</Launch>
-        <Profile>VMware</Profile>
-        <Description>Use VMware Player or Workstation to deploy and debug.</Description>
+        <Launch>None</Launch>
+        <Profile>ISO</Profile>
+        <Description>Creates a bootable ISO image which can be burned to a DVD. After running the selected project, an explorer window will open containing the ISO file. The ISO file can then be burned to a CD or DVD and used to boot a physical or virtual system.</Description>
         <PxeInterface>192.168.0.8</PxeInterface>
     </PropertyGroup>
 

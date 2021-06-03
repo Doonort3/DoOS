@@ -2,20 +2,20 @@
 
 namespace Doos_cli.Core
 {
-    public class CLI_PWD : CLICommand
+    public class OKAY : CLICommand
     {
-        public CLI_PWD()
+        public OKAY()
         {
-            names = new string[1]
+            names = new string[3]
             {
-                "pwd"
+                "hack", "nice", "okay"
             };
             completed = false;
         }
 
         public override void Execute(string[] args)
         {
-            CLI.Pwd();
+            CLI.Okay();
 
             base.Execute(args);
         }

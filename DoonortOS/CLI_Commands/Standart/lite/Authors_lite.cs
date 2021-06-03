@@ -2,20 +2,20 @@
 
 namespace Doos_cli.Core
 {
-    public class CLI_PWD : CLICommand
+    public class CLI_AUTHORS_LITE : CLICommand
     {
-        public CLI_PWD()
+        public CLI_AUTHORS_LITE()
         {
-            names = new string[1]
+            names = new string[2]
             {
-                "pwd"
+                "creator", "authors"
             };
             completed = false;
         }
 
         public override void Execute(string[] args)
         {
-            CLI.Pwd();
+            CLI_lite.Authors();
 
             base.Execute(args);
         }

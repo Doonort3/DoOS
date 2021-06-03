@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using doos_cli_re2.Core;
-using doos_cli_re2.Hardware;
+using Doos_cli.Core;
+using Doos_cli.Hardware;
 using Sys = Cosmos.System;
 
-namespace doos_cli_re2
+namespace Doos_cli
 {
     public class Kernel : Sys.Kernel
     {
         protected override void BeforeRun()
         {
-            Console.Clear();
-            PMFAT.Initialize();
             CLI.Initialize();
+            
+            
         }
 
         protected override void Run()
         {
             
+        }
+        public static void INIT()
+        {
+            if (!PMFAT.Initialize()) { CLI_lite.InitializeLite(); }
         }
     }
 }

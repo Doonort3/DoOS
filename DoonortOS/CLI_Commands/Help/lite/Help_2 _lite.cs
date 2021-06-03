@@ -1,21 +1,21 @@
-﻿
+﻿// Help 2 (справка, страница 2)
 
 namespace Doos_cli.Core
 {
-    public class CLI_PWD : CLICommand
+    public class CLI_HELP_2_LITE : CLICommand
     {
-        public CLI_PWD()
+        public CLI_HELP_2_LITE()
         {
             names = new string[1]
             {
-                "pwd"
+                "help-2"
             };
             completed = false;
         }
 
         public override void Execute(string[] args)
         {
-            CLI.Pwd();
+            CLI_lite.Help_page_2();
 
             base.Execute(args);
         }
