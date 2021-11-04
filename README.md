@@ -1,7 +1,7 @@
 # DoOS
 Simple similar to DOS operating system with Command Line Interface.
 
-DoOS is built on Cosmos OS, uses .net, X#, IL2CPU.
+DoOS is built on Cosmos OS, uses .net, C#, IL2CPU.
 
 ### Current features:
 
