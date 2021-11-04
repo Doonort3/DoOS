@@ -1,5 +1,7 @@
 ﻿
+using System;
 using System.IO;
+using Doos_cli.Core;
 using FS = Cosmos.System.FileSystem;
 
 namespace Doos_cli.Hardware
@@ -11,17 +13,23 @@ namespace Doos_cli.Hardware
     public static FS.CosmosVFS device;
 
     // init
-    public static bool Initialize()
+    public static void Initialize()
     {
-        // init
         try
         {
             device = new FS.CosmosVFS();
             FS.VFS.VFSManager.RegisterVFS(device);
-            Kernel.INIT();
-            return true;
         }
-        catch { return false; }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            CLI_lite.InitializeLite();
+            throw;
+        }
+        // init
+        
+            // Kernel.INIT();
+            // return true;
     }
     public static bool FileExists(string file) { return File.Exists(file); }
     public static bool FolderExists(string path) { return Directory.Exists(path); }

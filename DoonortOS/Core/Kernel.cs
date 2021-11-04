@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using Cosmos.System.FileSystem.Listing;
+using Cosmos.System.FileSystem.VFS;
 using Doos_cli.Core;
 using Doos_cli.Hardware;
 using Sys = Cosmos.System;
@@ -9,18 +12,28 @@ namespace Doos_cli
     {
         protected override void BeforeRun()
         {
-            CLI.Initialize();
-            
-            
+            PMFAT.Initialize();
         }
 
         protected override void Run()
         {
-            
+            CheckingDiskFunctionality();
+            if (!CheckingDiskFunctionality()) CLI_lite.InitializeLite();
+                else if (CheckingDiskFunctionality()) CLI.Initialize();
         }
-        public static void INIT()
+        public static bool CheckingDiskFunctionality()
         {
-            if (!PMFAT.Initialize()) { CLI_lite.InitializeLite(); }
+            try
+            {
+                VFSManager.CreateFile($@"0:\loadData.txt");
+                File.Delete($@"0:\loadData.txt");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }
         }
     }
 }

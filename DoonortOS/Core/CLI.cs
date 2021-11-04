@@ -22,6 +22,16 @@ namespace Doos_cli.Core
                 {
                     WriteLine("Initializing command library...",
                         ConsoleColor.Green); // Инициализация команд!!!!
+                    /*try
+                    {   
+                        Disk_info();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        CLI_lite.InitializeLite();
+                        throw;
+                    }*/
                     Commands.Add(new CLI_CLEAR());
                     Commands.Add(new CLI_ABOUT());
                     Commands.Add(new CLI_SHUTDOWN());
@@ -43,10 +53,12 @@ namespace Doos_cli.Core
                     Commands.Add(new CLI_DELETE_DIRECTORY());
                     Commands.Add(new OKAY());
                     Console.Clear();
-                    PMFAT.Initialize();
-                    if (!PMFAT.Initialize()) { Console.WriteLine("[FATAL ERROR] could not initialize fat driver!"); CLI_lite.InitializeLite(); }
+                    
+                    // if (!PMFAT.Initialize()) { Console.WriteLine("[FATAL ERROR] could not initialize fat driver!"); CLI_lite.InitializeLite(); }
                     WriteLine("Welcome to doos CLI!", ConsoleColor.Blue);
                     WriteLine("Enter 'help-1' to display the first page of commands.");
+
+                    GetInput();
 
                 }
                 catch (Exception e)
@@ -251,7 +263,7 @@ namespace Doos_cli.Core
             Console.WriteLine("     Telegram channel:" +
                               "\n     t.me/doonort_ch\n");
             Console.WriteLine("     Telegram profile:" +
-                              "\n     t.me/doonxrt");
+                              "\n     t.me/doonort3S");
             Console.WriteLine("=======================================");
         }
 
@@ -265,7 +277,7 @@ namespace Doos_cli.Core
 
         public static void Disk_info()
         {
-            var availableSpace = VFSManager.GetAvailableFreeSpace("0:/");
+            var availableSpace = VFSManager.GetAvailableFreeSpace("0:/"); 
 
             Console.WriteLine("Available Free Space: " + availableSpace + "\n"); // Free space output
             var fsType = VFSManager.GetFileSystemType("0:/"); // Getting the file system '0:/'
@@ -287,7 +299,7 @@ namespace Doos_cli.Core
 
             var currentDirectory = Directory.GetCurrentDirectory(); // Getting the current directory
             var directoryList =
-                VFSManager.GetDirectoryListing(currentDirectory); // Announcement of the main directory
+                VFSManager.GetDirectoryListing(currentDirectory); // Announcement of the main directory (Вторая инициализация - костыль)
 
             foreach (var directoryEntry in
                 directoryList) // Enumerating files from the directory specified in the 'directoryEntry' variable
@@ -325,7 +337,7 @@ namespace Doos_cli.Core
             var nameReadFile = Console.ReadLine();
 
             var exist = File.Exists($@"0:\{nameReadFile}"); // Checking the existence of the input file
-            if (exist == true) // If it exists
+            if (exist) // If it exists
             {
                 var helloFile = VFSManager.GetFile($@"0:\{nameReadFile}"); // Getting the file
                 var helloFileStream = helloFile.GetFileStream();
@@ -339,7 +351,7 @@ namespace Doos_cli.Core
                     Console.WriteLine(Encoding.Default.GetString(textToRead));
                 }
             }
-            else if (exist == false) // If it does not exist
+            else if (!exist) // If it does not exist
             {
                 WriteLine($"The file named '{nameReadFile}' does not exist!",
                     ConsoleColor.Red);
@@ -352,7 +364,7 @@ namespace Doos_cli.Core
             var nameEditFile = Console.ReadLine();
 
             var exist = File.Exists($@"0:\{nameEditFile}"); // Does the file exist?
-            if (exist == true) // If there is
+            if (exist) // If there is
             {
                 Console.WriteLine("Entry text: ");
                 var textEditFile = Console.ReadLine();
@@ -368,7 +380,7 @@ namespace Doos_cli.Core
                         textToWrite.Length);
                 }
             }
-            else if (exist == false) // If there is no
+            else if (!exist) // If there is no
             {
 
                 Console.WriteLine($"The file named '{nameEditFile}' does not exist!",
@@ -384,10 +396,10 @@ namespace Doos_cli.Core
             VFSManager.CreateFile($@"0:\{nameCreateFile}.txt");
 
             var checkCreate = File.Exists($@"0:\{nameCreateFile}.txt");
-            if (checkCreate == true)
+            if (checkCreate)
                 WriteLine("File created.",
                     ConsoleColor.DarkGreen);
-            else if (checkCreate == false)
+            else if (!checkCreate)
                 WriteLine($"Unknown error\nFile '{nameCreateFile}' was not created",
                     ConsoleColor.Red);
         }
@@ -398,7 +410,7 @@ namespace Doos_cli.Core
             var nameClearFile = Console.ReadLine();
             var exist = File.Exists($@"0:\{nameClearFile}");
 
-            if (exist == true)
+            if (exist)
             {
                 var helloFile = VFSManager.GetFile($@"0:\{nameClearFile}");
                 var helloFileStream = helloFile.GetFileStream();
@@ -412,7 +424,7 @@ namespace Doos_cli.Core
                         textToWrite.Length);
                 }
             }
-            else if (exist == false)
+            else if (!exist)
             {
                 WriteLine($"The file named '{nameClearFile}' does not exist!",
                     ConsoleColor.Red);
@@ -424,15 +436,15 @@ namespace Doos_cli.Core
             Console.WriteLine("Which file should I delete: ");
             var nameDeleteFile = Console.ReadLine();
             var exist = File.Exists($@"0:\{nameDeleteFile}");
-            if (exist == true)
+            if (exist)
             {
                 File.Delete($@"0:\{nameDeleteFile}");
 
                 var checkDelete = File.Exists($@"0:\{nameDeleteFile}");
-                if (checkDelete == false)
+                if (!checkDelete)
                     WriteLine("File deleted",
                         ConsoleColor.Green);
-                else if (checkDelete == true)
+                else if (checkDelete)
                     WriteLine($"Unknown error\nfile '{nameDeleteFile}' is not deleted",
                         ConsoleColor.Red);
             }

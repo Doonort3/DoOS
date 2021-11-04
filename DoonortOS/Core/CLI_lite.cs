@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cosmos.System;
+using Console = System.Console;
 
 namespace Doos_cli.Core
 {
@@ -14,8 +16,7 @@ namespace Doos_cli.Core
         {
             try
             {
-                WriteLine("Initializing command library...",
-                    ConsoleColor.Green); // Инициализация команд!!!!
+                WriteLine("Initializing command library...", ConsoleColor.Green); // Инициализация команд!!!!
                 Commands.Add(new CLI_CLEAR_LITE());
                 Commands.Add(new CLI_ABOUT_LITE());
                 Commands.Add(new CLI_SHUTDOWN_LITE());
@@ -27,11 +28,10 @@ namespace Doos_cli.Core
                 Console.Clear();
                 WriteLine("Welcome to doos CLI LITE!", ConsoleColor.Green);
                 WriteLine("Enter 'help-1' to display the first page of commands.");
-                WriteLine("This version of doos is abbreviated because no FAT file system disk was found.", ConsoleColor.Yellow);
+                WriteLine("This version of doos is abbreviated because no FAT file system disk was found.",
+                    ConsoleColor.Yellow);
                 WriteLine("Also, cut out commands that require an initialized file system.", ConsoleColor.Yellow);
-
                 GetInput();
-
             }
             catch (Exception e)
             {
@@ -51,12 +51,12 @@ namespace Doos_cli.Core
                 Console.WriteLine("\n    Press any key to restart and attempts to correct the error...");
                 Console.ReadKey(true);
                 Console.WriteLine("\nRestarting...");
-                Cosmos.System.Power.Reboot();
+                Power.Reboot();
                 throw;
             }
-
         }
-        public static void GetInput() // Получение ввода
+
+        private static void GetInput() // Получение ввода
         {
             Write("lite", ConsoleColor.Green);
             Write("@", ConsoleColor.DarkGray);
@@ -66,27 +66,16 @@ namespace Doos_cli.Core
             var pos = input.Split(' '); // Обработка ввода
             var exec = false;
 
-            for (var i = 0;
-                i < Commands.Count;
-                i++)
-            for (var j = 0;
-                j <
-                Commands[i]
-                    .names.Length;
-                j++)
-                if (pos[0]
-                        .ToLower() ==
-                    Commands[i]
-                        .names[j])
+            for (var i = 0; i < Commands.Count; i++)
+            for (var j = 0; j < Commands[i].names.Length; j++)
+                if (pos[0].ToLower() == Commands[i].names[j])
                 {
-                    Commands[i]
-                        .Execute(pos);
+                    Commands[i].Execute(pos);
                     exec = true;
                 }
 
             if (!exec) // Если команды не существует
-                WriteLine("Incorrect command!",
-                    ConsoleColor.Red);
+                WriteLine("Incorrect command!", ConsoleColor.Red);
 
             GetInput(); // Повторный вызов GetInput
         }
@@ -98,18 +87,15 @@ namespace Doos_cli.Core
 
         public static void About() // Команда About
         {
-            WriteLine("     _                           _   _     _   _   _" +
-                      "\r\n  __| |  ___   ___   ___    __  | | (_)   | | (_) | |_   ___ " +
-                      "\r\n / _` | / _ \\ / _ \\ (_-<   / _| | | | |   | | | | |  _| / -_)" +
-                      "\r\n \\__,_| \\___/ \\___/ /__/   \\__| |_| |_|   |_| |_|  \\__| \\___|\r\n",
-                ConsoleColor.Green);
-
+            WriteLine(
+                "     _                           _   _     _   _   _" +
+                "\r\n  __| |  ___   ___   ___    __  | | (_)   | | (_) | |_   ___ " +
+                "\r\n / _` | / _ \\ / _ \\ (_-<   / _| | | | |   | | | | |  _| / -_)" +
+                "\r\n \\__,_| \\___/ \\___/ /__/   \\__| |_| |_|   |_| |_|  \\__| \\___|\r\n", ConsoleColor.Green);
             WriteLine($"{SystemInfo_lite.OS_NAME_CLI_LITE} lite ver. {SystemInfo_lite.OS_VER_LITE}" +
-                      $"\nCurrent time: {SystemInfo_lite.CURRENT_TIME_LITE}" +
-                      $"\nCreated at: 06.05.2021" +
+                      $"\nCurrent time: {SystemInfo_lite.CURRENT_TIME_LITE}" + "\nCreated at: 06.05.2021" +
                       $"\nLatest update: {SystemInfo_lite.LATEST_UPDATE_LITE}" +
-                      $"\nKernel version: {SystemInfo_lite.KERNEL_VER_LITE}" +
-                      $"\n\nRAM capacity: ");
+                      $"\nKernel version: {SystemInfo_lite.KERNEL_VER_LITE}" + "\n\nRAM capacity: ");
             SystemInfo_lite.ShowRAM();
         }
 
@@ -123,7 +109,6 @@ namespace Doos_cli.Core
             Console.WriteLine("     'clear, cls, clr' -- Clear the console.");
             Console.WriteLine("\nTo go to another page, type: 'help-2'");
             Console.WriteLine("\nPage 1 of 2");
-
         }
 
         public static void Help_page_2()
@@ -146,54 +131,50 @@ namespace Doos_cli.Core
             Console.WriteLine("     Telegram channel:" +
                               "\n     t.me/doonort_ch\n");
             Console.WriteLine("     Telegram profile:" +
-                              "\n     t.me/doonxrt");
+                              "\n     t.me/doonort3");
             Console.WriteLine("=======================================");
         }
+
         public static void CTime()
         {
             Console.WriteLine("Current time: {0}",
                 DateTime.Now);
         }
+
         public static void Reboot() // Команда Reboot
         {
-            WriteLine("Reboot the system?: Y/n",
-                ConsoleColor.Yellow);
+            WriteLine("Reboot the system?: Y/n", ConsoleColor.Yellow);
             var confirmReboot = Console.ReadLine();
-
             switch (confirmReboot)
             {
                 case "y":
-                    Cosmos.System.Power.Reboot();
+                    Power.Reboot();
                     break;
                 case "n":
-                    WriteLine("Ok",
-                        ConsoleColor.Green);
+                    WriteLine("Ok", ConsoleColor.Green);
                     break;
                 default:
-                    Cosmos.System.Power.Reboot();
+                    Power.Reboot();
                     break;
             }
         }
+
         public static void Shutdown() // Команда Shutdown
         {
-            WriteLine("Finishing the job?: Y/n",
-                ConsoleColor.Yellow);
+            WriteLine("Finishing the job?: Y/n", ConsoleColor.Yellow);
             var confirmShutdown = Console.ReadLine();
-
             switch (confirmShutdown)
             {
                 case "y":
-                    Cosmos.System.Power.Shutdown();
+                    Power.Shutdown();
                     break;
                 case "n":
-                    WriteLine("Ok",
-                        ConsoleColor.Green);
+                    WriteLine("Ok", ConsoleColor.Green);
                     break;
                 default:
-                    Cosmos.System.Power.Shutdown();
+                    Power.Shutdown();
                     break;
             }
-
         }
 
         /*public static void Change_directory(string line, string[] args)
@@ -229,9 +210,9 @@ namespace Doos_cli.Core
 
         private static void Write(string txt, ConsoleColor fg)
         {
-            Console.ForegroundColor = (ConsoleColor)fg;
+            Console.ForegroundColor = fg;
             Console.Write(txt);
-            Console.ForegroundColor = (ConsoleColor)ForeColor;
+            Console.ForegroundColor = ForeColor;
         }
 
         private static void WriteLine(string txt,
