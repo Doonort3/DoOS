@@ -1,4 +1,4 @@
-![Meaning for me](https://img.shields.io/badge/%E2%99%A5-my%20favorite%20project-pink
+![Meaning for me](https://img.shields.io/badge/%E2%99%A5-my%20favorite%20project-pink)
 # DoOS
 Simple operating system with Command Line Interface.
 
