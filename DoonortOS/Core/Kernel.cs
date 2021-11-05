@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
-using Cosmos.System.FileSystem.Listing;
 using Cosmos.System.FileSystem.VFS;
-using Doos_cli.Core;
-using Doos_cli.Hardware;
+using DoonortOS.Hardware;
+using Console = System.Console;
 using Sys = Cosmos.System;
 
-namespace Doos_cli
+namespace DoonortOS.Core
 {
     public class Kernel : Sys.Kernel
     {
@@ -25,8 +24,8 @@ namespace Doos_cli
         {
             try
             {
-                VFSManager.CreateFile($@"0:\loadData.txt");
-                File.Delete($@"0:\loadData.txt");
+                VFSManager.CreateFile(@"0:\loadData.txt");
+                File.Delete(@"0:\loadData.txt");
                 return true;
             }
             catch (Exception e)

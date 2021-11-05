@@ -1,10 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.IO;
-using Doos_cli.Core;
+using DoonortOS.Core;
 using FS = Cosmos.System.FileSystem;
 
-namespace Doos_cli.Hardware
+namespace DoonortOS.Hardware
 {
     public static class PMFAT {
 

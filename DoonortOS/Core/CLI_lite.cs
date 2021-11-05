@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cosmos.System;
+using DoonortOS.Types;
 using Console = System.Console;
 
-namespace Doos_cli.Core
+namespace DoonortOS.Core
 {
     public static class CLI_lite
     {
@@ -26,17 +27,19 @@ namespace Doos_cli.Core
                 Commands.Add(new CLI_AUTHORS_LITE());
                 Commands.Add(new CLI_CTIME_LITE());
                 Console.Clear();
-                WriteLine("Welcome to doos CLI LITE!", ConsoleColor.Green);
+                WriteLine("Welcome to DoOS CLI LITE!", ConsoleColor.Green);
                 WriteLine("Enter 'help-1' to display the first page of commands.");
                 WriteLine("This version of doos is abbreviated because no FAT file system disk was found.",
                     ConsoleColor.Yellow);
                 WriteLine("Also, cut out commands that require an initialized file system.", ConsoleColor.Yellow);
+                Console.Beep();
                 GetInput();
             }
             catch (Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.Beep();
                 Console.Clear();
                 Console.WriteLine("\n========================================================================");
                 Console.WriteLine("\nStatus: Kernel panic!                       ");
@@ -148,12 +151,14 @@ namespace Doos_cli.Core
             switch (confirmReboot)
             {
                 case "y":
+                    Console.Beep();
                     Power.Reboot();
                     break;
                 case "n":
                     WriteLine("Ok", ConsoleColor.Green);
                     break;
                 default:
+                    Console.Beep();
                     Power.Reboot();
                     break;
             }
@@ -166,12 +171,14 @@ namespace Doos_cli.Core
             switch (confirmShutdown)
             {
                 case "y":
+                    Console.Beep();
                     Power.Shutdown();
                     break;
                 case "n":
                     WriteLine("Ok", ConsoleColor.Green);
                     break;
                 default:
+                    Console.Beep();
                     Power.Shutdown();
                     break;
             }

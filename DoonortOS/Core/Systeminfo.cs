@@ -1,15 +1,19 @@
 ﻿using System;
 using Cosmos.System.FileSystem.VFS;
 
-namespace Doos_cli.Core
+namespace DoonortOS.Core
 {
     public static class SystemInfo
     {
         public static string OS_NAME_CLI = "DOOS CLI";
-        public static string OS_VER = "1.4-b2";
-        public static string KERNEL_VER = "userkit_20200708";
+        public static string OS_VER = "1.5-b1";
+        public static string KERNEL_VER = "devkit_20200708";
+
+        /*
         public static string KERNEL_INFO = "Some DOS I created on Cosmos OS" +
                                            "\nDoOS is built on Cosmos OS, uses .net, X#, IL2CPU. Created similar to SHELL";
+        */
+
         public static object CURRENT_TIME = DateTime.Now;
         public static string LATEST_UPDATE = "25.05.2021";
 

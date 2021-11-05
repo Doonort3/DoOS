@@ -1,5 +1,5 @@
 ﻿
-namespace Doos_cli.Core
+namespace DoonortOS.Types
 {
     public abstract class CLICommand
     {

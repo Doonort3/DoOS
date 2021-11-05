@@ -1,65 +1,93 @@
-﻿using Cosmos.System.FileSystem.Listing;
-using Cosmos.System.FileSystem.VFS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Doos_cli.Hardware;
+using Cosmos.System.FileSystem.Listing;
+using Cosmos.System.FileSystem.VFS;
+using DoonortOS.Types;
+using Console = System.Console;
 using Sys = Cosmos.System;
 
-namespace Doos_cli.Core
+namespace DoonortOS.Core
 {
     public static class CLI
         {
             public static ConsoleColor BackColor = ConsoleColor.Black;
             public static ConsoleColor ForeColor = ConsoleColor.White;
 
+            public static string loginAndPass = File.ReadAllText("0:\\SYSTEM\\login.txt"); // Read saved Login and Password from file 
             public static List<CLICommand> Commands = new List<CLICommand>(); // Создание листа с командами
-
             public static void Initialize()
             {
                 try
                 {
-                    WriteLine("Initializing command library...",
-                        ConsoleColor.Green); // Инициализация команд!!!!
-                    /*try
-                    {   
-                        Disk_info();
-                    }
-                    catch (Exception e)
+                    check: 
+                    if (File.Exists(@"0:\SYSTEM\login.txt"))
                     {
-                        Console.WriteLine(e);
-                        CLI_lite.InitializeLite();
-                        throw;
-                    }*/
-                    Commands.Add(new CLI_CLEAR());
-                    Commands.Add(new CLI_ABOUT());
-                    Commands.Add(new CLI_SHUTDOWN());
-                    Commands.Add(new CLI_REBOOT());
-                    Commands.Add(new CLI_HELP_1());
-                    Commands.Add(new CLI_HELP_2());
-                    Commands.Add(new CLI_HELP_3());
-                    Commands.Add(new CLI_AUTHORS());
-                    Commands.Add(new CLI_CTIME());
-                    Commands.Add(new CLI_DISK_INFO());
-                    Commands.Add(new CLI_LS());
-                    Commands.Add(new CLI_LS_A());
-                    Commands.Add(new CLI_READ_FILE());
-                    Commands.Add(new CLI_EDIT_FILE());
-                    Commands.Add(new CLI_CREATE_FILE());
-                    Commands.Add(new CLI_CLEAR_FILE());
-                    Commands.Add(new CLI_DELETE_FILE());
-                    Commands.Add(new CLI_PWD());
-                    Commands.Add(new CLI_DELETE_DIRECTORY());
-                    Commands.Add(new OKAY());
-                    Console.Clear();
-                    
-                    // if (!PMFAT.Initialize()) { Console.WriteLine("[FATAL ERROR] could not initialize fat driver!"); CLI_lite.InitializeLite(); }
-                    WriteLine("Welcome to doos CLI!", ConsoleColor.Blue);
-                    WriteLine("Enter 'help-1' to display the first page of commands.");
+                        
+                        Clear();
+                        string loginAndPass = File.ReadAllText(@"0:\SYSTEM\login.txt"); // Read saved Login and Password from file 
+                        string[] lp = loginAndPass.Split(' '); // Converting one string with content "login password" to lp
+                        login: 
+                        WriteLine("Username: ");
+                        string loginInput = Console.ReadLine(); // User Input
+                        WriteLine($"Password for {loginInput}: ");
+                        string passInput = Console.ReadLine(); // User Input
 
-                    GetInput();
+                        if (loginInput == lp[0] && passInput == lp[1]) // If password and login from input is same like in file
+                        {
+                            Console.WriteLine("YES");
+                            WriteLine("Initializing command library...",
+                            ConsoleColor.Green); // Инициализация команд!!!!
 
+                            Commands.Add(new CLI_CLEAR());
+                            Commands.Add(new CLI_ABOUT());
+                            Commands.Add(new CLI_SHUTDOWN());
+                            Commands.Add(new CLI_REBOOT());
+                            Commands.Add(new CLI_HELP_1());
+                            Commands.Add(new CLI_HELP_2());
+                            Commands.Add(new CLI_HELP_3());
+                            Commands.Add(new CLI_AUTHORS());
+                            Commands.Add(new CLI_AUTHORS_2());
+                            Commands.Add(new CLI_CTIME());
+                            Commands.Add(new CLI_DISK_INFO());
+                            Commands.Add(new CLI_LS());
+                            Commands.Add(new CLI_LS_A());
+                            Commands.Add(new CLI_READ_FILE());
+                            Commands.Add(new CLI_EDIT_FILE());
+                            Commands.Add(new CLI_CREATE_FILE());
+                            Commands.Add(new CLI_CLEAR_FILE());
+                            Commands.Add(new CLI_DELETE_FILE());
+                            Commands.Add(new CLI_PWD());
+                            Commands.Add(new CLI_DELETE_DIRECTORY());
+                            Commands.Add(new OKAY());
+                            Console.Clear();
+
+                            // if (!PMFAT.Initialize()) { Console.WriteLine("[FATAL ERROR] could not initialize fat driver!"); CLI_lite.InitializeLite(); }
+                            Console.Beep(); // Beeeeep
+                            WriteLine($"Welcome to DoOS CLI!", ConsoleColor.Blue);
+                            WriteLine("Enter 'help-1' to display the first page of commands.");
+                            GetInput();
+                            // pass
+                        }
+                        else // If password or login isnt correct
+                        {
+                            WriteLine("NO\nLet's try again: ", ConsoleColor.Red);
+                            goto login;
+                        }
+                    }
+                    else
+                    {
+                        File.Create(@"0:\SYSTEM\login.txt");
+                        WriteLine("Create a user, enter a name and password,\n using the pattern 'Username password', like 'Luftkatze 12345'", ConsoleColor.Yellow);
+                        String newLogin = Console.ReadLine();
+                        File.WriteAllText(@"0:\SYSTEM\login.txt", newLogin);
+                        if (string.IsNullOrEmpty(loginAndPass))
+                        {
+                            WriteLine("Saved!", ConsoleColor.Green);
+                            goto check;
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
@@ -81,7 +109,7 @@ namespace Doos_cli.Core
                     Console.WriteLine("\nRestarting...");
                     Cosmos.System.Power.Reboot();
                     throw;
-                }
+                } 
             }
 
             public static void GetInput() // Получение ввода
@@ -177,6 +205,7 @@ namespace Doos_cli.Core
             switch (confirmShutdown)
             {
                 case "y":
+                    Console.Beep();
                     Sys.Power.Shutdown();
                     break;
                 case "n":
@@ -184,6 +213,7 @@ namespace Doos_cli.Core
                         ConsoleColor.Green);
                     break;
                 default:
+                    Console.Beep();
                     Sys.Power.Shutdown();
                     break;
             }
@@ -199,6 +229,7 @@ namespace Doos_cli.Core
             switch (confirmReboot)
             {
                 case "y":
+                    Console.Beep();
                     Sys.Power.Reboot();
                     break;
                 case "n":
@@ -206,6 +237,7 @@ namespace Doos_cli.Core
                         ConsoleColor.Green);
                     break;
                 default:
+                    Console.Beep();
                     Sys.Power.Reboot();
                     break;
             }
@@ -255,21 +287,40 @@ namespace Doos_cli.Core
 
         public static void Authors()
         {
-            WriteLine("\n     Doonort3",
+            WriteLine("\n1.   Doonort3 - main coder",
                 ConsoleColor.Green);
             Console.WriteLine("=======================================");
             Console.WriteLine("     VK:" +
                               "\n     vk.com/shirakibaka\n");
             Console.WriteLine("     Telegram channel:" +
-                              "\n     t.me/doonort_ch\n");
-            Console.WriteLine("     Telegram profile:" +
-                              "\n     t.me/doonort3S");
+                              "\n     t.me/doonort_ch\n"); ;
+            Console.WriteLine("     GitHub Profile:" +
+                              "\n     github.com/Doonort3\n");
+            Console.WriteLine("     Discord:" +
+                              "\n     doonort#3847\n");
             Console.WriteLine("=======================================");
+            Console.WriteLine("\nTo go to another page, type: 'authors-2' or 'creators-2'");
+            Console.WriteLine("\nPage 1 of 2");
+
+        }
+
+        public static void Authors_2()
+        {
+            WriteLine("\n2.   Luftkatze - helper (login)",
+                ConsoleColor.Green);
+            Console.WriteLine("=======================================");
+            Console.WriteLine("     Discord:" +
+                              "\n     Luftkatze#2137\n");
+            Console.WriteLine("     GitHub Profile:" +
+                              "\n     github.com/LuftkatzeBASIC\n");
+            Console.WriteLine("=======================================");
+            Console.WriteLine("\nTo go to another page, type: 'authors' or 'creators'");
+            Console.WriteLine("\nPage 2 of 2");
         }
 
         public static void CTime()
         {
-            Console.WriteLine("Current time: {0}",
+            Console.WriteLine("Current time: {0}", // github.com/Doonort3
                 DateTime.Now);
         }
 
@@ -385,7 +436,6 @@ namespace Doos_cli.Core
 
                 Console.WriteLine($"The file named '{nameEditFile}' does not exist!",
                     ConsoleColor.Red);
-
             }
         }
 
