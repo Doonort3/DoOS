@@ -1,4 +1,7 @@
 ![Meaning for me](https://img.shields.io/badge/%E2%99%A5-my%20favorite%20project-pink)
+![ISO image size](https://img.shields.io/badge/iso%20size-%3C50%20MB-blue)
+![Interface type](https://img.shields.io/badge/interface-command--line-9cf)
+
 # DoOS
 Simple operating system with Command Line Interface.
 
